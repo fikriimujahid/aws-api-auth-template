@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "Node16",
+    "moduleResolution": "Node16",
+    "lib": ["ES2022"],
+    "strict": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "rootDir": "src",
+    "outDir": "build",
+    "types": ["node"],
+    "paths": {
+      "@shared-cognito/*": ["./src/shared/cognito/*"],
+      "@shared-dynamodb/*": ["./src/shared/dynamodb/*"],
+      "@shared-swagger/*": ["./src/shared/swagger/*"],
+      "@shared-utils/*": ["./src/shared/utils/*"]
+    }
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "build", "tests"]
+}

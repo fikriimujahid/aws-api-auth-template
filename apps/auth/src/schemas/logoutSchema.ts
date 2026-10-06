@@ -1,0 +1,42 @@
+import { APIGatewayProxyEventV2 } from "aws-lambda";
+import { extractRefreshToken } from "@shared-utils/cookies";
+
+interface LogoutRequest {
+  refreshToken: string | null;
+}
+
+interface SafeParseSuccess<T> {
+  success: true;
+  data: T;
+}
+
+type SafeParseResult<T> = SafeParseSuccess<T>;
+
+const normalizePayloadObject = (input: unknown): Record<string, unknown> => {
+  if (!input || typeof input !== "object" || Array.isArray(input)) {
+    return {};
+  }
+
+  return input as Record<string, unknown>;
+};
+
+const safeParsePayload = (input: unknown): SafeParseResult<LogoutRequest> => {
+  const payload = normalizePayloadObject(input);
+  const refreshToken = payload.refreshToken;
+
+  return {
+    success: true,
+    data: {
+      refreshToken: typeof refreshToken === "string" && refreshToken.length > 0 ? refreshToken : null
+    }
+  };
+};
+
+export const logoutSchema = {
+  safeParse: (input: unknown): SafeParseResult<LogoutRequest> => {
+    return safeParsePayload(input);
+  },
+  safeParseEvent: (event: APIGatewayProxyEventV2): SafeParseResult<LogoutRequest> => {
+    return safeParsePayload({ refreshToken: extractRefreshToken(event) });
+  }
+};

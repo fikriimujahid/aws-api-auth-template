@@ -1,0 +1,148 @@
+{
+  "info": {
+    "_postman_id": "fe19a083-d533-4172-854b-246aae8bff11",
+    "name": "Auth Service API (Generated)",
+    "description": "Generated from backend/openapi/swagger.json with per-service collection variables.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth service",
+      "item": [
+        {
+          "name": "Authenticate with email and password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{authServiceBaseUrl}}/login",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Register a new account",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{authServiceBaseUrl}}/register",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fullName\": \"\",\n  \"email\": \"user@example.com\",\n  \"password\": \"\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Request password reset code",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{authServiceBaseUrl}}/forgot-password",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Confirm password reset with verification code",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{authServiceBaseUrl}}/forgot-password/confirm",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"code\": \"\",\n  \"newPassword\": \"\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Refresh auth session from refresh token cookie",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "{{authServiceBaseUrl}}/refresh"
+          },
+          "response": []
+        },
+        {
+          "name": "Logout current session and clear refresh cookie",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "{{authServiceBaseUrl}}/logout"
+          },
+          "response": []
+        },
+        {
+          "name": "Get current authentication session status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{authServiceBaseUrl}}/session"
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "authServiceBaseUrl",
+      "value": "/api/auth",
+      "type": "string",
+      "description": "Auth service base URL"
+    },
+    {
+      "key": "accessToken",
+      "value": "",
+      "type": "string",
+      "description": "Bearer token used by secured requests"
+    }
+  ]
+}
